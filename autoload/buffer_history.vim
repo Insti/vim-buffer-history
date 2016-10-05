@@ -44,6 +44,16 @@ function! buffer_history#jump(...) abort "{{{1
   echo 'Reached' (dirn > 0 ? 'end' : 'start') 'of buffer history'
 endfunction
 
+function! buffer_history#reset() "{{{1
+  let current_buffer_num = winbufnr(0)
+  let current_buffer_at_index = index(w:buffer_history, current_buffer_num)
+
+  call remove(w:buffer_history, current_buffer_at_index)
+  call add(w:buffer_history, current_buffer_num)
+
+  let w:buffer_history_index = len(w:buffer_history) - 1
+endfunction
+
 function! buffer_history#list() "{{{1
   let history = copy(w:buffer_history)
   let history = map(history, "printf('%3d %1s %-10s', v:val, v:key == w:buffer_history_index ? '*': ' ', bufname(v:val))")
