@@ -12,6 +12,7 @@ augroup END
 
 command! BufferHistoryList call buffer_history#list()
 command! BufferHistoryReset call buffer_history#reset()
+command! -nargs=1 BufferHistoryJumpTo call buffer_history#jumpto(<f-args>)
 command! -count=1 BufferHistoryBack call buffer_history#jump()
 command! -count=1 BufferHistoryForward call buffer_history#jump(1)
 

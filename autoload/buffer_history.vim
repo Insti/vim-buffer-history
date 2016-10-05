@@ -44,6 +44,12 @@ function! buffer_history#jump(...) abort "{{{1
   echo 'Reached' (dirn > 0 ? 'end' : 'start') 'of buffer history'
 endfunction
 
+function! buffer_history#jumpto(position) "{{{1
+    let total_history = len(w:buffer_history) - 1
+    let index_to_transition_to = total_history - a:position
+    exec 'buffer' w:buffer_history[index_to_transition_to]
+endfunction
+
 function! buffer_history#reset() "{{{1
   let current_buffer_num = winbufnr(0)
   let current_buffer_at_index = index(w:buffer_history, current_buffer_num)
