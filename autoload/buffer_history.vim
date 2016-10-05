@@ -47,7 +47,10 @@ endfunction
 function! buffer_history#jumpto(position) "{{{1
     let total_history = len(w:buffer_history) - 1
     let index_to_transition_to = total_history - a:position
+
+    let s:jumping = 1
     exec 'buffer' w:buffer_history[index_to_transition_to]
+    let s:jumping = 0
 endfunction
 
 function! buffer_history#reset() "{{{1
